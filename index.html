@@ -1,12 +1,94 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Neptune Website</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <h1 class="title">Neptune Motoroworks</h1>
-      <p id="currentTime"></p>
-      <script src="script.js"></script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Site Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F2F2F7; /* Light grey background */
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-height: 50px; /* Adjust this based on your logo size */
+            width: auto;
+        }
+        .main-content {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .main-image {
+            width: 50%;
+            height: 400px;
+        }
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fits nicely */
+        }
+        .text-content {
+            width: 50%;
+        }
+        .text-content h1 {
+            font-size: 48px;
+            margin: 0 0 20px 0;
+            font-weight: bold;
+        }
+        .text-content p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .footer div {
+            font-size: 16px;
+        }
+        .footer h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Site Logo">
+        </div>
+        <div class="main-content">
+            <div class="main-image">
+                <img src="image.png" alt="Main Image">
+            </div>
+            <div class="text-content">
+                <h1>Opening soon.</h1>
+                <p>Our flagship location is opening this fall. Sign up with your email address to get notified.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <h3>Location</h3>
+                <p>123 Demo Street<br>New York, NY 12345</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>email@example.com<br>(555) 555-5555</p>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
