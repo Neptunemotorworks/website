@@ -131,14 +131,15 @@
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, var(--primary-blue-hex) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             line-height: 1.1;
+        }
+
+        .hero-title img {
+            max-width: 100%;
+            height: auto;
+            max-height: 240px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         .hero-subtitle {
@@ -358,7 +359,9 @@
     <!-- Hero Section -->
     <section id="home" class="main-content">
         <div class="hero-container">
-            <h1 class="hero-title">Neptüne</h1>
+            <h1 class="hero-title">
+                <img src="Logos and Names/neptuneb.png" alt="Neptune" />
+            </h1>
             <p class="hero-subtitle">Redefining electric watercraft innovation with cutting-edge technology and sustainable engineering</p>
             <a href="#opportunities" class="cta-button">Join Our Mission</a>
             <div class="scroll-indicator">Scroll to explore</div>
