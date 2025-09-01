@@ -30,7 +30,7 @@
 
         /* Image Background */
         .image-background {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -216,11 +216,15 @@
             background: #000000;
             min-height: 100vh;
             width: 100%;
+            position: relative;
         }
 
         .dawn-background {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
         }
 
@@ -228,6 +232,60 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* Join Us Section */
+        .join-content {
+            text-align: center;
+            max-width: 1200px;
+        }
+
+        .join-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            color: rgb(0, 41, 91);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .join-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            color: rgb(0, 41, 91);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .join-cta {
+            margin-bottom: 3rem;
+        }
+
+        .join-text {
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            font-weight: 600;
+            color: rgb(0, 41, 91);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-email {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            color: rgb(0, 41, 91);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .founded-text {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 400;
+            color: rgb(0, 41, 91);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-top: 2rem;
+            letter-spacing: 0.02em;
         }
 
         .hero-container {
@@ -381,6 +439,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#electric">Electric</a></li>
                     <li><a href="#dawn">Dawn</a></li>
+                    <li><a href="#join">Join</a></li>
                 </ul>
             </div>
         </div>
@@ -408,7 +467,20 @@
     <!-- Dawn Image Section -->
     <section id="dawn" class="main-content dawn-section">
         <div class="dawn-background">
-            <img src="dawn.png" alt="Dawn" class="dawn-image">
+            <img src="Logos and Names/Dawn.png" alt="Dawn" class="dawn-image">
+        </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section id="join" class="main-content white-section">
+        <div class="join-content">
+            <h1 class="join-title">It is a new dawn.</h1>
+            <p class="join-subtitle">This isn't an upgrade - but a complete redesign.</p>
+            <div class="join-cta">
+                <p class="join-text">Join us.</p>
+                <p class="contact-email">contact@neptunemotorworks.com</p>
+            </div>
+            <p class="founded-text">Founded 2024, West Los Angeles</p>
         </div>
     </section>
 
