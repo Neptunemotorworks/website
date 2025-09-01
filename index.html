@@ -517,28 +517,79 @@
 
             /* Mobile image/video scaling */
             .image-background img {
-                object-fit: cover;
+                width: 100vw;
+                height: auto;
+                max-height: 70vh;
+                object-fit: contain;
                 object-position: center;
-                height: 120%;
-                transform: scale(1.1);
+                display: block;
+                margin: 0 auto;
+            }
+
+            .image-background {
+                background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%);
+                padding: 1rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .dawn-image {
-                object-fit: cover;
+                width: 100vw;
+                height: auto;
+                max-height: 70vh;
+                object-fit: contain;
                 object-position: center;
-                height: 120%;
-                transform: scale(1.1);
+                display: block;
+                margin: 0 auto;
+            }
+
+            .dawn-section {
+                background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%);
+                padding: 1rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .quadrant-video {
-                object-fit: cover;
+                width: 100%;
+                height: auto;
+                max-height: 50vh;
+                object-fit: contain;
                 object-position: center;
-                height: 120%;
-                transform: scale(1.1);
             }
 
             .video-grid {
-                height: 100vh;
+                height: auto;
+                min-height: 60vh;
+                gap: 0;
+                padding: 0.5rem 0;
+            }
+
+            .video-quadrant {
+                height: auto;
+                min-height: 30vh;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Adjust panel heights for mobile */
+            .main-content {
+                min-height: auto;
+                height: auto;
+                padding: 1rem 0;
+            }
+
+            .charging-section {
+                min-height: auto;
+                height: auto;
+                padding: 1rem 0;
+            }
+
+            .dawn-section {
+                min-height: auto;
+                height: auto;
             }
 
             .electric-features {
@@ -610,17 +661,64 @@
 
             /* Mobile image/video scaling for small screens */
             .image-background img {
-                object-fit: cover;
+                width: 100vw;
+                height: auto;
+                max-height: 60vh;
+                object-fit: contain;
                 object-position: center;
-                height: 130%;
-                transform: scale(1.2);
+                display: block;
+                margin: 0 auto;
             }
 
             .dawn-image {
-                object-fit: cover;
+                width: 100vw;
+                height: auto;
+                max-height: 60vh;
+                object-fit: contain;
                 object-position: center;
-                height: 130%;
-                transform: scale(1.2);
+                display: block;
+                margin: 0 auto;
+            }
+
+            .quadrant-video {
+                width: 100%;
+                height: auto;
+                max-height: 45vh;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .video-grid {
+                height: auto;
+                min-height: 50vh;
+                gap: 0;
+                padding: 0.5rem 0;
+            }
+
+            .video-quadrant {
+                height: auto;
+                min-height: 25vh;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Smaller panels for phones */
+            .main-content {
+                min-height: auto;
+                height: auto;
+                padding: 0.8rem 0;
+            }
+
+            .charging-section {
+                min-height: auto;
+                height: auto;
+                padding: 0.8rem 0;
+            }
+
+            .dawn-section {
+                min-height: auto;
+                height: auto;
+                padding: 0.8rem 0;
             }
         }
 
