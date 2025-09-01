@@ -3,132 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neptüne</title>
+    <title>Neptüne - Electric Watercraft Innovation</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #F2F2F7;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            margin-bottom: 20px;
-        }
-        .header img {
-            max-height: 50px;
-            width: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-        }
-        .main-image {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            margin: 0 auto;
-        }
-        .main-image img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-        .text-content {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .text-content h1 {
-            font-size: 36px;
-            margin: 0 0 15px 0;
-            font-weight: bold;
-            text-align: center;
-        }
-        .text-content p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin: 0 0 20px 0;
-        }
-        .footer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 30px;
-            text-align: center;
-        }
-        .footer div {
-            font-size: 16px;
-        }
-        .footer h3 {
-            margin-bottom: 10px;
-            font-size: 18px;
+            box-sizing: border-box;
         }
 
-        /* Media Queries for Mobile */
-        @media screen and (min-width: 768px) {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --primary-blue: rgb(0, 41, 91);
+            --primary-blue-hex: #00295b;
+            --primary-blue-light: rgba(0, 41, 91, 0.8);
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue-hex);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue-hex);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-blue-hex) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue-hex) 0%, #004080 100%);
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 41, 91, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-blue-hex);
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 41, 91, 0.5);
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-blue-hex);
+        }
+
+        .content-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-blue-hex);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
             .main-content {
-                flex-wrap: nowrap;
+                padding: 0 1rem;
             }
-            .main-image {
-                width: 50%;
-                height: 400px;
+
+            .content-section {
+                padding: 4rem 1rem;
             }
-            .main-image img {
-                height: 100%;
+
+            .section-content {
+                grid-template-columns: 1fr;
             }
-            .text-content {
-                width: 50%;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            .text-content h1 {
-                font-size: 48px;
-                text-align: left;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-            .text-content p {
-                font-size: 18px;
+        }
+
+        .hero-container {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .content-card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
             }
-            .footer {
-                justify-content: flex-end;
-                text-align: left;
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="logo.png" alt="Site Logo">
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="video-7ce45930-3b7f-43a1-9903-959d31028988.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="Logos and Names/logo.png" alt="Neptüne" class="logo">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#opportunities">Opportunities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-        <div class="main-content">
-            <div class="main-image">
-                <img src="image.png" alt="Main Image">
-            </div>
-            <div class="text-content">
-                <h1>Something is coming.</h1>
-                <p>Are you an aerospace, mechanical, electrical engineering, or physics student with a passion for innovation? We’re seeking 2 motivated college or grad students to join our EV jetski project, poised to transform the industry. Led by current aerospace professionals with strong industry connections, this hands-on opportunity will sharpen your skills, enhance your network, and provide you hands on experience. Be part of a team that’s changing the game. Send us your resume and help shape the future!</p>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="main-content">
+        <div class="hero-container">
+            <h1 class="hero-title">Neptüne</h1>
+            <p class="hero-subtitle">Redefining electric watercraft innovation with cutting-edge technology and sustainable engineering</p>
+            <a href="#opportunities" class="cta-button">Join Our Mission</a>
+            <div class="scroll-indicator">Scroll to explore</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section">
+        <div class="section-container">
+            <h2 class="section-title">Our Vision</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <h3>Innovation</h3>
+                    <p>Pioneering the future of electric watercraft with advanced propulsion systems and cutting-edge technology that pushes the boundaries of what's possible on the water.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Sustainability</h3>
+                    <p>Committed to environmental stewardship through zero-emission electric propulsion, reducing our carbon footprint while delivering exceptional performance.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Excellence</h3>
+                    <p>Combining aerospace-grade engineering with marine expertise to create watercraft that set new standards for reliability, efficiency, and user experience.</p>
+                </div>
             </div>
         </div>
-        <div class="footer">
-            <div>
+    </section>
+
+    <!-- Opportunities Section -->
+    <section id="opportunities" class="content-section">
+        <div class="section-container">
+            <h2 class="section-title">Join Our Team</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <h3>EV Jetski Project</h3>
+                    <p>We're seeking 2 motivated college or grad students to join our revolutionary EV jetski project. This hands-on opportunity will transform the industry and your career.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Ideal Candidates</h3>
+                    <p>Aerospace, mechanical, electrical engineering, or physics students with a passion for innovation and a drive to shape the future of electric watercraft.</p>
+                </div>
+                <div class="content-card">
+                    <h3>What You'll Gain</h3>
+                    <p>Sharpen your skills, enhance your network, and gain hands-on experience working with current aerospace professionals with strong industry connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
                 <h3>Location</h3>
                 <p>West LA</p>
             </div>
-            <div>
+            <div class="footer-section">
                 <h3>Contact</h3>
                 <p>contact@neptunemotorworks.com</p>
             </div>
+            <div class="footer-section">
+                <h3>Mission</h3>
+                <p>Transforming the watercraft industry through electric innovation and sustainable engineering.</p>
+            </div>
         </div>
-    </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe content cards
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
