@@ -517,20 +517,24 @@
 
             /* Mobile image/video scaling */
             .image-background img {
-                object-fit: contain;
+                object-fit: cover;
                 object-position: center;
+                height: 120%;
+                transform: scale(1.1);
             }
 
             .dawn-image {
-                object-fit: contain;
+                object-fit: cover;
                 object-position: center;
+                height: 120%;
+                transform: scale(1.1);
             }
 
             .quadrant-video {
-                object-fit: contain;
+                object-fit: cover;
                 object-position: center;
-                height: 100%;
-                transform: none;
+                height: 120%;
+                transform: scale(1.1);
             }
 
             .video-grid {
@@ -600,6 +604,21 @@
             }
 
             .quadrant-video {
+                height: 130%;
+                transform: scale(1.2);
+            }
+
+            /* Mobile image/video scaling for small screens */
+            .image-background img {
+                object-fit: cover;
+                object-position: center;
+                height: 130%;
+                transform: scale(1.2);
+            }
+
+            .dawn-image {
+                object-fit: cover;
+                object-position: center;
                 height: 130%;
                 transform: scale(1.2);
             }
