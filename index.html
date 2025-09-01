@@ -514,6 +514,40 @@
             .quadrant-text p {
                 font-size: clamp(0.9rem, 4vw, 1.5rem);
             }
+
+            /* Mobile image/video scaling */
+            .image-background img {
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .dawn-image {
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .quadrant-video {
+                object-fit: contain;
+                object-position: center;
+                height: 100%;
+                transform: none;
+            }
+
+            .video-grid {
+                height: 100vh;
+            }
+
+            .electric-features {
+                margin-bottom: 2rem;
+            }
+
+            .join-cta {
+                margin-bottom: 2rem;
+            }
+
+            .join-logo {
+                margin-bottom: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -571,22 +605,74 @@
             }
         }
 
-        /* Mobile-specific optimizations */
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: rgb(0, 41, 91);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav-toggle:hover {
+            color: #004080;
+        }
+
         @media (max-width: 768px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(25px);
+                border-bottom: 2px solid rgba(0, 41, 91, 0.2);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem 0;
+                border-bottom: 1px solid rgba(0, 41, 91, 0.1);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.8rem 0;
+                width: 100%;
+                display: block;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .header-center-logo {
+                display: none;
+            }
+
             .nav-container {
-                padding: 0 0.5rem;
-            }
-
-            .electric-features {
-                margin-bottom: 2rem;
-            }
-
-            .join-cta {
-                margin-bottom: 2rem;
-            }
-
-            .join-logo {
-                margin-bottom: 1.5rem;
+                justify-content: space-between;
+                padding: 0 1rem;
             }
         }
 
@@ -649,6 +735,7 @@
             </div>
             <img src="Logos and Names/neptuneb.png" alt="Neptune" class="header-logo header-center-logo">
             <div class="nav-right">
+                <button class="mobile-nav-toggle">☰</button>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#electric">Electric</a></li>
@@ -768,6 +855,23 @@
             card.style.opacity = '1';
             card.style.transform = 'none';
         });
+
+        // Mobile navigation toggle
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileNavToggle && navLinks) {
+            mobileNavToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>
