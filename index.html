@@ -20,6 +20,68 @@
             overflow-x: hidden;
             font-family: 'Inter', sans-serif;
         }
+        /* Mobile viewport fixes */
+        @media (max-width: 768px) {
+            html, body {
+                width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .hero-section {
+                height: auto; /* Let content determine height */
+                min-height: auto;
+                padding: 4rem 20px 2rem; /* Top padding for logo space */
+                display: block; /* Normal document flow */
+            }
+
+            .hero-text {
+                position: static; /* Normal document flow */
+                font-size: clamp(1.2rem, 6vw, 1.8rem); /* Smaller font for mobile */
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            #excerpt-section {
+                min-height: auto;
+                height: auto;
+                margin-top: 1rem;
+                padding: 1rem 20px;
+            }
+
+            #bg-canvas {
+                width: 100vw;
+                height: 100vh;
+                position: fixed; /* Keep canvas full screen */
+            }
+
+            main {
+                padding-bottom: 2rem; /* Add bottom padding so content doesn't get cut off */
+            }
+        }
+
+        /* Desktop behavior */
+        @media (min-width: 769px) {
+            .hero-text {
+                position: relative; /* Normal document flow on desktop */
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            .hero-section {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                padding: 2rem;
+            }
+        }
+
         /* Sleek scrollbar styling for WebKit browsers (Chrome, Safari) */
         ::-webkit-scrollbar {
             width: 8px;
@@ -63,7 +125,6 @@
         main {
             position: relative;
             z-index: 1;
-            min-height: 200vh; /* Hero + excerpts section */
         }
         .hero-section {
             height: 100vh;
@@ -80,13 +141,15 @@
             line-height: 1.4;
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         #excerpt-section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 20px;
+            margin-top: 2rem; /* Add space between hero and excerpt sections */
         }
         .upper-excerpt, .lower-excerpt {
             flex: 1;
@@ -307,48 +370,52 @@
             canvasHeight = rect.height;
             canvasWidth = rect.width;
             generateDots(); // Regenerate grid on resize
+
+            // Handle mobile layout immediately on resize
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                            window.innerWidth < 768;
+            if (isMobile) {
+                // Show excerpts immediately on mobile
+                if (excerpt1) {
+                    excerpt1.style.opacity = '1';
+                    excerpt1.style.transform = 'translateX(0)';
+                }
+                if (excerpt2) {
+                    excerpt2.style.opacity = '1';
+                    excerpt2.style.transform = 'translateX(0)';
+                }
+            }
         }
 
         // Listen for scroll and resize
         window.addEventListener('scroll', () => {
             scrollY = window.scrollY;
-            const initialViewport = canvasHeight;
-            const effectiveScroll = Math.max(0, scrollY - initialViewport);
-            const remainingScroll = maxScroll - initialViewport;
-            const progress = remainingScroll > 0 ? effectiveScroll / remainingScroll : 0;
-            lineWidth = Math.min(progress * canvasWidth, canvasWidth / 2); // Stop at halfway
-            contentLine.style.width = `${lineWidth}px`;
-            swarmActive = (progress > 0.5); // Start swarm animation after halfway progress
-            if (swarmActive && !redCenters.length) {
-                let potential = [];
-                dots.forEach(dot => {
-                    if (dot.baseX > canvasWidth / 2 && dot.baseY > canvasHeight / 2 && dot.baseY < canvasHeight * 1.5) { // Right-bottom area in base positions
-                        potential.push(dot);
-                    }
-                });
-                potential.sort(() => Math.random() - 0.5); // Shuffle
-                redCenters = potential.slice(0, 3); // 3 red centers
-                redCenters.forEach(center => {
-                    center.colorOverride = 'red';
-                    dots.forEach(d => {
-                        if (d !== center) {
-                            const dx = d.baseX - center.baseX;
-                            const dy = d.baseY - center.baseY;
-                            const dist = Math.sqrt(dx*dx + dy*dy);
-                            if (dist < 100) { // Decreased to 100px for fewer blue dots
-                                d.colorOverride = 'blue';
-                            }
-                        }
-                    });
-                });
-            }
-            if (excerpt1) {
-                excerpt1.style.opacity = progress;
-                excerpt1.style.transform = `translateX(${(1 - progress) * -100}%)`;
-            }
-            if (excerpt2) {
-                excerpt2.style.opacity = progress;
-                excerpt2.style.transform = `translateX(${(1 - progress) * -100}%)`;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                            window.innerWidth < 768;
+
+            if (!isMobile) {
+                // Desktop scroll behavior
+                const initialViewport = canvasHeight;
+                const effectiveScroll = Math.max(0, scrollY - initialViewport);
+                const remainingScroll = maxScroll - initialViewport;
+                const progress = remainingScroll > 0 ? effectiveScroll / remainingScroll : 0;
+                lineWidth = Math.min(progress * canvasWidth, canvasWidth / 2); // Stop at halfway
+                contentLine.style.width = `${lineWidth}px`;
+                swarmActive = (progress > 0.5); // Start swarm animation after halfway progress
+            } else {
+                // Mobile: static layout, no scroll animations
+                swarmActive = false;
+                lineWidth = 0;
+                contentLine.style.width = '0px';
+                // Show excerpts immediately on mobile
+                if (excerpt1) {
+                    excerpt1.style.opacity = '1';
+                    excerpt1.style.transform = 'translateX(0)';
+                }
+                if (excerpt2) {
+                    excerpt2.style.opacity = '1';
+                    excerpt2.style.transform = 'translateX(0)';
+                }
             }
         });
         window.addEventListener('resize', () => {
