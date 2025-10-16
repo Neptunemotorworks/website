@@ -24,52 +24,57 @@
         @media (max-width: 768px) {
             html, body {
                 width: 100vw;
-                height: 100vh;
-                overflow: hidden; /* Prevent scrolling on mobile */
+                height: auto; /* Allow content to determine height */
+                overflow-y: auto; /* Allow vertical scrolling if needed */
+                overflow-x: hidden;
             }
 
             .hero-section {
-                height: auto; /* Let content determine height */
+                height: auto;
                 min-height: auto;
-                padding: 9rem 20px 1rem; /* Even more top padding to clear logo */
-                display: block; /* Normal document flow */
+                padding: 6rem 20px 1rem; /* Reasonable top padding */
+                display: block;
             }
 
             .hero-text {
-                position: static; /* Normal document flow */
-                font-size: clamp(1rem, 5vw, 1.5rem); /* Even smaller font for mobile */
+                position: static;
+                font-size: clamp(1.2rem, 6vw, 1.8rem); /* Slightly larger font for readability */
                 width: 100%;
                 max-width: none;
                 margin: 0;
                 padding: 0;
                 text-align: center;
-                line-height: 1.3;
+                line-height: 1.4;
             }
 
             #excerpt-section {
                 min-height: auto;
                 height: auto;
-                margin-top: 0.5rem;
-                padding: 0.5rem 20px 1rem; /* Reduced padding */
-                font-size: 0.9rem; /* Smaller excerpt text */
+                margin-top: 1rem;
+                padding: 1rem 20px 2rem;
+                font-size: 1rem;
             }
 
             .excerpt-text {
-                font-size: clamp(0.9rem, 4vw, 1.1rem); /* Smaller excerpt text */
-                margin-bottom: 0.5rem;
+                font-size: clamp(1rem, 4.5vw, 1.2rem);
+                margin-bottom: 1rem;
+                line-height: 1.4;
             }
 
             #bg-canvas {
                 width: 100vw;
                 height: 100vh;
-                position: fixed; /* Keep canvas full screen */
+                position: fixed;
             }
 
             main {
-                height: 100vh;
-                overflow: hidden; /* Ensure no scrolling */
-                display: flex;
-                flex-direction: column;
+                min-height: 100vh; /* Minimum viewport height */
+                padding-bottom: 2rem;
+            }
+
+            /* Ensure logo is above content */
+            #logo {
+                z-index: 10;
             }
         }
 
