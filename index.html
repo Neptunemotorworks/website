@@ -3,1020 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tags -->
-    <title>Neptüne - Electric Watercraft</title>
-    <meta name="title" content="Neptüne - Electric Watercraft">
-    <meta name="description" content="Discover Neptune Jetskis, the innovative electric jetski from neptüne. Explore cutting-edge electric watercraft , sustainable watercraft innovation, and the future of personal watercraft.">
-    <meta name="keywords" content="electric jetski, neptune jetskis, electric watercraft, sustainable boating, marine innovation, electric boat, neptune motorworks, los angeles">
-    <meta name="author" content="Neptune Motorworks">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://neptüne.com/">
-    <meta property="og:title" content="Neptüne - Electric Watercraft Innovation">
-    <meta property="og:description" content="Discover Neptune Jetskis, the innovative electric jetski from neptüne. Explore cutting-edge electric watercraft technology and sustainable marine innovation.">
-    <meta property="og:image" content="https://neptüne.com/">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://neptüne.com/">
-    <meta property="twitter:title" content="Neptüne - Electric Watercraft Innovation">
-    <meta property="twitter:description" content="Discover Neptune Jetskis, the innovative electric jetski from neptüne. Explore cutting-edge electric watercraft technology and sustainable marine innovation.">
-    <meta property="twitter:image" content="https://neptüne.com/">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://neptüne.com/">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>AUV Company Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Kanit:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        html {
+            direction: rtl;
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #888 #f1f1f1; /* For Firefox */
         }
-
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #ffffff;
+            direction: ltr;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Neutral white-ish background */
             overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
-
-        :root {
-            --primary-blue: rgb(0, 41, 91);
-            --primary-blue-hex: #00295b;
-            --primary-blue-light: rgba(0, 41, 91, 0.8);
+        /* Sleek scrollbar styling for WebKit browsers (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* Image Background */
-        .image-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
         }
-
-        .image-background img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(1.1) contrast(1.05);
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
         }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
-
-        /* Navigation */
-        .navbar {
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1.2rem 2rem;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px);
-            border-bottom: 2px solid rgba(0, 41, 91, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .header-center-logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 90px;
-            width: auto;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .header-logo {
-            height: 120px;
-            width: auto;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-            transition: transform 0.3s ease;
-        }
-
-        .header-logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: var(--primary-blue-hex);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a:hover {
-            color: #004080;
-            text-shadow: 0 0 10px rgba(0, 41, 91, 0.3);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 50%;
-            background: linear-gradient(90deg, var(--primary-blue-hex), #004080);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Main Content */
-        .main-content {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 2rem;
-            position: relative;
-            transform: none !important;
-            margin: 0;
-        }
-
-        /* White Section */
-        .white-section {
-            background: #ffffff;
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        .electric-content {
-            text-align: center;
-            max-width: 1200px;
-        }
-
-        .electric-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
-        }
-
-        .electric-features {
-            margin-bottom: 3rem;
-        }
-
-        .feature-text {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 300;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0.5rem 0;
-            letter-spacing: -0.01em;
-        }
-
-        .built-by {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-top: 2rem;
-            letter-spacing: 0.02em;
-        }
-
-        /* Dawn Section */
-        .dawn-section {
-            background: #000000;
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
-            margin: 0;
-            padding: 0;
-        }
-
-        .dawn-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
+            z-index: -1; /* Behind content */
+            pointer-events: none; /* Doesn't interfere with clicks */
         }
-
-        .dawn-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Join Us Section */
-        .join-content {
-            text-align: center;
-            max-width: 1200px;
-        }
-
-        .join-title {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-
-        .join-logo {
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .join-logo-img {
-            max-width: 100%;
+        #logo {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 200px; /* Bigger logo */
             height: auto;
-            max-height: 200px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            z-index: 2; /* Above main */
         }
-
-        .join-subtitle {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 300;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-bottom: 3rem;
-            letter-spacing: -0.01em;
+        #neptune-logo {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 180px; /* Bigger size */
+            height: auto;
+            z-index: 2; /* Above main */
         }
-
-        .join-cta {
-            margin-bottom: 3rem;
-        }
-
-        .join-text {
-            font-size: clamp(1.8rem, 4.5vw, 3rem);
-            font-weight: 600;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .contact-email {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            letter-spacing: 0.02em;
-        }
-
-        .founded-text {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin-top: 2rem;
-            letter-spacing: 0.02em;
-        }
-
-        /* Charging Video Section */
-        .charging-section {
-            background: #ffffff;
-            min-height: 100vh;
-            width: 100%;
+        main {
             position: relative;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+            z-index: 1;
+            min-height: 200vh; /* Hero + excerpts section */
         }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            width: 100%;
+        .hero-section {
             height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        .video-quadrant {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-        }
-
-                    .white-quadrant {
-                background: transparent;
-            }
-
-        .quadrant-video {
-            width: 100%;
-            height: 120%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            margin: 0;
-            padding: 0;
-            transform: scale(1.1);
-        }
-
-        .quadrant-text {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            width: 100%;
+            padding: 20px;
         }
-
-        .quadrant-text p {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 400;
-            color: rgb(0, 41, 91);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        .hero-text {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300; /* Lighter weight */
+            color: #1a1a1a;
             text-align: center;
-            letter-spacing: -0.01em;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            text-align: center;
-            z-index: 10;
-            transform: none !important;
-        }
-
-        .hero-title {
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            transform: none !important;
-        }
-
-        .hero-title img {
-            max-width: 100%;
-            height: auto;
-            max-height: 240px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-            transform: none !important;
-            margin-bottom: 2rem;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 300;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            transform: none !important;
-            margin-top: 1rem;
+            margin: 0 auto;
         }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-blue-hex) 0%, #004080 100%);
-            color: #ffffff;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
+        #excerpt-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
         }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 41, 91, 0.4);
+        .upper-excerpt, .lower-excerpt {
+            flex: 1;
+            display: flex;
+            padding: 10px 0;
         }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        .upper-excerpt {
+            align-items: flex-end;
         }
-
-        .cta-button:hover::before {
-            left: 100%;
+        .lower-excerpt {
+            align-items: flex-start;
         }
-
-
-
-
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 0.6rem 0.75rem;
-            }
-
-            .logo {
-                height: 45px;
-            }
-
-            .header-logo {
-                height: 60px;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-
-            .main-content {
-                padding: 0 1rem;
-            }
-
-            .electric-title {
-                font-size: clamp(2rem, 8vw, 3rem);
-                margin-bottom: 1.5rem;
-            }
-
-            .feature-text {
-                font-size: clamp(1rem, 4vw, 1.4rem);
-                margin: 0.3rem 0;
-            }
-
-            .built-by {
-                font-size: clamp(0.9rem, 3vw, 1.2rem);
-                margin-top: 1.5rem;
-            }
-
-            .join-subtitle {
-                font-size: clamp(1.2rem, 5vw, 2rem);
-                margin-bottom: 2rem;
-            }
-
-            .join-text {
-                font-size: clamp(1.5rem, 6vw, 2.5rem);
-            }
-
-            .contact-email {
-                font-size: clamp(1rem, 3.5vw, 1.5rem);
-            }
-
-            .founded-text {
-                font-size: clamp(0.8rem, 3vw, 1.2rem);
-            }
-
-            .join-logo-img {
-                max-height: 150px;
-            }
-
-            .quadrant-text p {
-                font-size: clamp(0.9rem, 4vw, 1.5rem);
-            }
-
-            /* Mobile image/video scaling */
-            .image-background img {
-                width: 100%;
-                height: auto;
-                max-height: 60vh;
-                object-fit: contain;
-                object-position: center;
-                display: block;
-                margin: 0 auto;
-            }
-
-            .image-background {
-                background: transparent;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: auto;
-            }
-
-            .dawn-image {
-                width: 100%;
-                height: auto;
-                max-height: 60vh;
-                object-fit: contain;
-                object-position: center;
-                display: block;
-                margin: 0 auto;
-            }
-
-            .dawn-section {
-                background: transparent;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: auto;
-            }
-
-            .quadrant-video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                background: #000000;
-            }
-
-            .video-grid {
-                height: auto;
-                min-height: 19vh;
-                gap: 0;
-                padding: 0.1rem 0;
-            }
-
-            .video-quadrant {
-                height: 19vh;
-                margin: 0;
-                padding: 0;
-            }
-
-            /* Adjust panel heights for mobile */
-            .main-content {
-                height: auto;
-                min-height: 40vh;
-                padding: 2rem 0 0.25rem 0;
-            }
-
-            .charging-section {
-                height: auto;
-                min-height: 50vh;
-                padding: 1rem 0 0.25rem 0;
-            }
-
-            .dawn-section {
-                height: auto;
-                min-height: 40vh;
-                padding: 1rem 0 0.25rem 0;
-            }
-
-            .electric-features {
-                margin-bottom: 1rem;
-            }
-
-            .join-cta {
-                margin-bottom: 1rem;
-            }
-
-            .join-logo {
-                margin-bottom: 1rem;
-            }
+        .excerpt-text {
+            font-size: clamp(1.2rem, 3vw, 2rem); /* Smaller font */
+            font-weight: 300; /* Same lighter weight */
+            color: #1a1a1a;
+            text-align: left;
+            line-height: 1.4;
+            max-width: 600px;
+            margin: 0;
+            padding-left: 20px;
+            opacity: 0;
+            transform: translateX(-100%);
         }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 0.45rem 0.6rem;
-            }
-
-            .logo {
-                height: 37px;
-            }
-
-            .header-logo {
-                height: 52px;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
-            }
-
-            .main-content {
-                padding: 0 0.8rem;
-            }
-
-            .electric-title {
-                font-size: clamp(1.8rem, 10vw, 2.5rem);
-            }
-
-            .join-subtitle {
-                font-size: clamp(1rem, 6vw, 1.8rem);
-            }
-
-            .join-text {
-                font-size: clamp(1.3rem, 7vw, 2rem);
-            }
-
-            .join-logo-img {
-                max-height: 120px;
-            }
-
-            .quadrant-text p {
-                font-size: clamp(0.8rem, 5vw, 1.2rem);
-            }
-
-            .video-grid {
-                height: 100vh;
-            }
-
-            .quadrant-video {
-                height: 130%;
-                transform: scale(1.2);
-            }
-
-            /* Mobile image/video scaling for small screens */
-            .image-background img {
-                width: 100%;
-                height: auto;
-                max-height: 50vh;
-                object-fit: contain;
-                object-position: center;
-                display: block;
-                margin: 0 auto;
-            }
-
-            .dawn-image {
-                width: 100%;
-                height: auto;
-                max-height: 50vh;
-                object-fit: contain;
-                object-position: center;
-                display: block;
-                margin: 0 auto;
-            }
-
-            .quadrant-video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                background: #000000;
-            }
-
-            .video-grid {
-                height: auto;
-                min-height: 15vh;
-                gap: 0;
-                padding: 0.1rem 0;
-            }
-
-            .video-quadrant {
-                height: 15vh;
-                margin: 0;
-                padding: 0;
-            }
-
-            /* Smaller panels for phones */
-            .main-content {
-                height: auto;
-                min-height: 35vh;
-                padding: 1.5rem 0 0.1rem 0;
-            }
-
-            .charging-section {
-                height: auto;
-                min-height: 45vh;
-                padding: 0.75rem 0 0.1rem 0;
-            }
-
-            .dawn-section {
-                height: auto;
-                min-height: 35vh;
-                padding: 0.75rem 0 0.1rem 0;
-            }
+        .dark-blue {
+            color: #00295b; /* RGB 0,41,91 */
         }
-
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: rgb(0, 41, 91);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-nav-toggle:hover {
-            color: #004080;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(25px);
-                border-bottom: 2px solid rgba(0, 41, 91, 0.2);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                flex-direction: column;
-                gap: 0;
-                padding: 1rem 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-                padding: 0.8rem 0;
-                border-bottom: 1px solid rgba(0, 41, 91, 0.1);
-            }
-
-            .nav-links li:last-child {
-                border-bottom: none;
-            }
-
-            .nav-links a {
-                font-size: 1.1rem;
-                padding: 0.8rem 0;
-                width: 100%;
-                display: block;
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
-
-            .header-center-logo {
-                display: none;
-            }
-
-            .nav-container {
-                justify-content: space-between;
-                padding: 0 1rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-container {
-            animation: none;
-        }
-
-        .content-card {
-            animation: none;
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+        #content-line {
+            height: 2px;
+            width: 0;
+            background: #00295b; /* RGB 0,41,91 */
         }
     </style>
 </head>
 <body>
-    <!-- Image Background -->
-    <div class="image-background">
-        <img src="Logos and Names/Neso.png" alt="Neso Background">
-        <div class="image-overlay"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-left">
-                <img src="Logos and Names/logob.png" alt="Neptüne" class="logo">
+    <canvas id="bg-canvas"></canvas>
+    <img id="logo" src="logo.png" alt="AUV Company Logo">
+    <img id="neptune-logo" src="Logos and Names/neptuneb.png" alt="Neptune Logo">
+    <main>
+        <section class="hero-section">
+            <div class="hero-text">
+                We are building next-generation, scalable autonomous underwater vehicles to <span class="dark-blue">safeguard national defense</span>.
             </div>
-            <img src="Logos and Names/neptuneb.png" alt="Neptune" class="header-logo header-center-logo">
-            <div class="nav-right">
-                <button class="mobile-nav-toggle">☰</button>
-                                 <ul class="nav-links">
-                     <li><a href="#home">Home</a></li>
-                     <li><a href="#electric">Electric</a></li>
-                     <li><a href="#charging">Charging</a></li>
-                     <li><a href="#join">Join</a></li>
-                 </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="main-content">
-        <!-- Empty hero section - just background image -->
-    </section>
-
-    <!-- Electric Watercraft Section -->
-    <section id="electric" class="main-content white-section">
-        <div class="electric-content">
-            <h1 class="electric-title">100% electric watercraft</h1>
-            <div class="electric-features">
-                <p class="feature-text">no fumes</p>
-                <p class="feature-text">no oil filters</p>
-                <p class="feature-text">no flushing</p>
-                <p class="feature-text">no headaches</p>
-            </div>
-            <p class="built-by">built by aerospace engineers in los angeles</p>
-        </div>
-    </section>
-
-    <!-- Charging Video Section -->
-    <section id="charging" class="main-content charging-section">
-        <div class="video-grid">
-            <div class="video-quadrant top-left">
-                <video autoplay muted loop playsinline class="quadrant-video">
-                    <source src="Logos and Names/fog.mov" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="video-quadrant top-right white-quadrant">
-                <div class="quadrant-text">
-                    <p>unbeatable acceleration and top speed</p>
+        </section>
+        <section id="excerpt-section">
+            <div class="upper-excerpt">
+                <div id="excerpt1" class="excerpt-text">
+                    We are looking for hardcore mechanical, software, and gnc engineers who have a passion for building and breaking. Experience on boats is a plus.
                 </div>
             </div>
-            <div class="video-quadrant bottom-left white-quadrant">
-                <div class="quadrant-text">
-                    <p>fast charging supported</p>
+            <div id="content-line"></div>
+            <div class="lower-excerpt">
+                <div id="excerpt2" class="excerpt-text">
+                    If this sounds like you, send your resume, a picture of something you built, and a sentence why you would be a good fit to john@neptuneauv.com
                 </div>
             </div>
-            <div class="video-quadrant bottom-right">
-                <video autoplay muted loop playsinline class="quadrant-video">
-                    <source src="Logos and Names/charging.mov" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dawn Image Section -->
-    <section id="dawn" class="main-content dawn-section">
-        <div class="dawn-background">
-            <img src="Logos and Names/Dawn.png" alt="Dawn" class="dawn-image">
-        </div>
-    </section>
-
-    <!-- Join Us Section -->
-    <section id="join" class="main-content white-section">
-        <div class="join-content">
-            <div class="join-logo">
-                <img src="Logos and Names/logob.png" alt="Neptüne" class="join-logo-img">
-            </div>
-            <p class="join-subtitle">This isn't an upgrade.<br>
-                It's a completely new way to jetski.</p>
-            <div class="join-cta">
-                <p class="join-text">Join us.</p>
-                <p class="contact-email">contact@neptunemotorworks.com</p>
-            </div>
-            <p class="founded-text">Founded 2024, West Los Angeles</p>
-        </div>
-    </section>
-
-
-
-
-
-
+        </section>
+    </main>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        const contentLine = document.getElementById('content-line');
+        const excerpt1 = document.getElementById('excerpt1');
+        const excerpt2 = document.getElementById('excerpt2');
+        let dots = [];
+        const gridSpacing = 50; // Distance between dots in grid (adjust for density)
+        const dotSize = 2; // Fixed size for all dots
+        const waveAmplitude = 10; // Max horizontal wave offset (pixels)
+        const waveFrequency = 0.02; // How "wavy" it is (higher = more waves)
+        const parallaxSpeed = 0.3; // Vertical parallax factor
+        const blinkDuration = 500; // Blink speed in ms (for red dots)
+        let scrollY = 0;
+        let lineWidth = 0;
+        let swarmActive = false;
+        let swarmGroups = [];
+        let maxScroll = 0;
+        let canvasHeight = 0;
+        let canvasWidth = 0;
+
+        // Generate dots in a uniform grid
+        function generateDots() {
+            dots = [];
+            const cols = Math.ceil(canvas.width / gridSpacing) + 2; // Extra for waving and clearing
+            const rows = Math.ceil((canvasHeight * 2) / gridSpacing); // Extra height for scrolling
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const isRed = Math.random() < 0.05; // ~5% chance for red blinking dots
+                    dots.push({
+                        baseX: col * gridSpacing,
+                        baseY: row * gridSpacing,
+                        isRed: isRed,
+                        size: dotSize
                     });
                 }
-            });
-        });
+            }
+        }
 
-        // Navbar background on scroll
+        // Draw function with wave, constant blink, and full-height clearing from left to right
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const now = Date.now();
+            const blinkPhase = (Math.sin(now / blinkDuration) + 1) / 2; // 0-1 opacity for constant blink
+
+            dots.forEach(dot => {
+                // Parallax vertical adjustment
+                let adjustedY = (dot.baseY - scrollY * parallaxSpeed) % (canvasHeight * 2);
+                if (adjustedY < 0) adjustedY += canvasHeight * 2;
+
+                // Wave horizontal offset based on Y and scrollY
+                const waveOffset = Math.sin(adjustedY * waveFrequency + scrollY * 0.001) * waveAmplitude;
+                let adjustedX = dot.baseX + waveOffset;
+
+                // Skip drawing if to the left of the line's end (full-height clear from left)
+                if (adjustedX < lineWidth) {
+                    return; // Don't draw this dot, creating full-height white space
+                }
+
+                // Skip drawing all dots in the animation area (right side, raised)
+                if (swarmActive && adjustedX > canvasWidth / 2 && adjustedY > canvasHeight * 0.1) {
+                    return;
+                }
+
+                // Draw dot
+                ctx.beginPath();
+                ctx.arc(adjustedX, adjustedY, dot.size, 0, Math.PI * 2);
+                if (dot.isRed) {
+                    ctx.globalAlpha = blinkPhase; // Constant blink opacity for red
+                    ctx.fillStyle = '#00295b'; // Blue RGB(0,41,91)
+                } else {
+                    ctx.globalAlpha = 1;
+                    ctx.fillStyle = '#d3d3d3'; // Light grey
+                }
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1; // Reset alpha
+
+            // Draw custom swarm animation if active
+            if (swarmActive) {
+                const t = now / 1000; // Time in seconds
+                const period = 10; // Slower period for slower movement across the page
+
+                // Draw red dot
+                const redProgress = (t % period) / period;
+                const redX = (canvasWidth / 2) + redProgress * (canvasWidth / 2);
+                const redY = canvasHeight - redProgress * canvasHeight * 1.5; // From bottom to top
+                if (redY > -dotSize * 2) { // Draw if not completely off top
+                    ctx.beginPath();
+                    ctx.arc(redX, redY, dotSize, 0, Math.PI * 2);
+                    ctx.globalAlpha = 1; // Solid red for longer
+                    ctx.fillStyle = '#ff0000'; // Red
+                    ctx.fill();
+                }
+
+                // Draw 3 trios following with delay
+                for (let index = 0; index < 3; index++) {
+                    const delay = (index + 1) * 1; // Increased delay for chasing effect
+                    const effectiveT = Math.max(0, t - delay);
+                    const progress = (effectiveT % period) / period;
+                    const centerX = (canvasWidth / 2) + progress * (canvasWidth / 2);
+                    const centerY = canvasHeight - progress * canvasHeight * 1.5;
+                    if (centerY < -50) continue; // Skip if off top
+
+                    const verticalMotion = Math.sin(effectiveT) * 50; // Up-down motion amplitude
+                    const currentCenterY = centerY + verticalMotion;
+                    const radii = [40, 30, 20]; // Bigger triangles
+                    const yOffsets = [-30, 0, 30]; // Adjusted for bigger size
+                    const groupDots = [];
+
+                    for (let j = 0; j < 3; j++) {
+                        const angle = effectiveT * 0.5 + (j * 2 * Math.PI / 3); // Slower flips (reduced speed to 0.5)
+                        const radius = radii[j];
+                        const dotY = currentCenterY + yOffsets[j] + Math.sin(angle) * radius * 0.5; // Add vertical swirl component
+                        const dotX = centerX + Math.cos(angle) * radius;
+                        ctx.beginPath();
+                        ctx.arc(dotX, dotY, dotSize, 0, Math.PI * 2);
+                        ctx.globalAlpha = blinkPhase; // Blink for consistency
+                        ctx.fillStyle = '#00295b'; // Blue
+                        ctx.fill();
+                        groupDots.push({x: dotX, y: dotY});
+                    }
+                    ctx.globalAlpha = 1;
+
+                    // Draw lines between the dots in the group
+                    ctx.strokeStyle = 'rgba(0,41,91,0.2)';
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i < 3; i++) {
+                        for (let j = i + 1; j < 3; j++) {
+                            ctx.beginPath();
+                            ctx.moveTo(groupDots[i].x, groupDots[i].y);
+                            ctx.lineTo(groupDots[j].x, groupDots[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            requestAnimationFrame(draw); // Continuous loop for blinking and updates
+        }
+
+        // Handle resize
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvasHeight = canvas.height;
+            canvasWidth = canvas.width;
+            generateDots(); // Regenerate grid on resize
+            swarmGroups = []; // Reset swarm groups on resize
+        }
+
+        // Listen for scroll and resize
         window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            scrollY = window.scrollY;
+            const initialViewport = canvasHeight;
+            const effectiveScroll = Math.max(0, scrollY - initialViewport);
+            const remainingScroll = maxScroll - initialViewport;
+            const progress = remainingScroll > 0 ? effectiveScroll / remainingScroll : 0;
+            lineWidth = Math.min(progress * canvasWidth, canvasWidth / 2); // Stop at halfway
+            contentLine.style.width = `${lineWidth}px`;
+            swarmActive = (progress > 0.5); // Start swarm animation after halfway progress
+            if (excerpt1) {
+                excerpt1.style.opacity = progress;
+                excerpt1.style.transform = `translateX(${(1 - progress) * -100}%)`;
+            }
+            if (excerpt2) {
+                excerpt2.style.opacity = progress;
+                excerpt2.style.transform = `translateX(${(1 - progress) * -100}%)`;
             }
         });
-
-        // Remove all scroll-based animations
-        document.querySelectorAll('.content-card').forEach(card => {
-            card.style.opacity = '1';
-            card.style.transform = 'none';
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         });
 
-        // Mobile navigation toggle
-        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        if (mobileNavToggle && navLinks) {
-            mobileNavToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                });
-            });
-        }
+        // Initial setup
+        resizeCanvas();
+        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        draw(); // Start the animation loop
     </script>
 </body>
 </html>
