@@ -122,12 +122,12 @@
 </head>
 <body>
     <canvas id="bg-canvas"></canvas>
-    <img id="logo" src="logo.png" alt="AUV Company Logo">
+    <img id="logo" src="Logos and Names/logob.png" alt="AUV Company Logo">
     <img id="neptune-logo" src="Logos and Names/neptuneb.png" alt="Neptune Logo">
     <main>
         <section class="hero-section">
             <div class="hero-text">
-                We are building next-generation, scalable autonomous underwater vehicles to <span class="dark-blue">safeguard national defense</span>.
+                We are building scalable autonomous underwater vehicle swarms to combat <span class="dark-blue">emerging unmanned threats</span>.
             </div>
         </section>
         <section id="excerpt-section">
@@ -161,7 +161,7 @@
         let scrollY = 0;
         let lineWidth = 0;
         let swarmActive = false;
-        let swarmGroups = [];
+        let redCenters = [];
         let maxScroll = 0;
         let canvasHeight = 0;
         let canvasWidth = 0;
@@ -173,12 +173,12 @@
             const rows = Math.ceil((canvasHeight * 2) / gridSpacing); // Extra height for scrolling
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < cols; col++) {
-                    const isRed = Math.random() < 0.05; // ~5% chance for red blinking dots
+                    const isBlue = Math.random() < 0.05; // 5% chance for blinking blue
                     dots.push({
                         baseX: col * gridSpacing,
                         baseY: row * gridSpacing,
-                        isRed: isRed,
-                        size: dotSize
+                        size: dotSize,
+                        colorOverride: isBlue ? 'blue' : null
                     });
                 }
             }
@@ -189,6 +189,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const now = Date.now();
             const blinkPhase = (Math.sin(now / blinkDuration) + 1) / 2; // 0-1 opacity for constant blink
+            const blueBlinkPhase = (Math.sin(now / blinkDuration + Math.PI) + 1) / 2; // Offset for blue
 
             dots.forEach(dot => {
                 // Parallax vertical adjustment
@@ -204,84 +205,23 @@
                     return; // Don't draw this dot, creating full-height white space
                 }
 
-                // Skip drawing all dots in the animation area (right side, raised)
-                if (swarmActive && adjustedX > canvasWidth / 2 && adjustedY > canvasHeight * 0.1) {
-                    return;
-                }
-
-                // Draw dot
+                // Draw dot with override if any
                 ctx.beginPath();
                 ctx.arc(adjustedX, adjustedY, dot.size, 0, Math.PI * 2);
-                if (dot.isRed) {
-                    ctx.globalAlpha = blinkPhase; // Constant blink opacity for red
-                    ctx.fillStyle = '#00295b'; // Blue RGB(0,41,91)
-                } else {
-                    ctx.globalAlpha = 1;
-                    ctx.fillStyle = '#d3d3d3'; // Light grey
+                let alpha = 1;
+                let fillStyle = '#d3d3d3'; // Default grey
+                if (dot.colorOverride === 'red') {
+                    fillStyle = '#ff0000';
+                    alpha = 1; // Solid red
+                } else if (dot.colorOverride === 'blue') {
+                    fillStyle = '#00295b';
+                    alpha = blueBlinkPhase;
                 }
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = fillStyle;
                 ctx.fill();
             });
             ctx.globalAlpha = 1; // Reset alpha
-
-            // Draw custom swarm animation if active
-            if (swarmActive) {
-                const t = now / 1000; // Time in seconds
-                const period = 10; // Slower period for slower movement across the page
-
-                // Draw red dot
-                const redProgress = (t % period) / period;
-                const redX = (canvasWidth / 2) + redProgress * (canvasWidth / 2);
-                const redY = canvasHeight - redProgress * canvasHeight * 1.5; // From bottom to top
-                if (redY > -dotSize * 2) { // Draw if not completely off top
-                    ctx.beginPath();
-                    ctx.arc(redX, redY, dotSize, 0, Math.PI * 2);
-                    ctx.globalAlpha = 1; // Solid red for longer
-                    ctx.fillStyle = '#ff0000'; // Red
-                    ctx.fill();
-                }
-
-                // Draw 3 trios following with delay
-                for (let index = 0; index < 3; index++) {
-                    const delay = (index + 1) * 1; // Increased delay for chasing effect
-                    const effectiveT = Math.max(0, t - delay);
-                    const progress = (effectiveT % period) / period;
-                    const centerX = (canvasWidth / 2) + progress * (canvasWidth / 2);
-                    const centerY = canvasHeight - progress * canvasHeight * 1.5;
-                    if (centerY < -50) continue; // Skip if off top
-
-                    const verticalMotion = Math.sin(effectiveT) * 50; // Up-down motion amplitude
-                    const currentCenterY = centerY + verticalMotion;
-                    const radii = [40, 30, 20]; // Bigger triangles
-                    const yOffsets = [-30, 0, 30]; // Adjusted for bigger size
-                    const groupDots = [];
-
-                    for (let j = 0; j < 3; j++) {
-                        const angle = effectiveT * 0.5 + (j * 2 * Math.PI / 3); // Slower flips (reduced speed to 0.5)
-                        const radius = radii[j];
-                        const dotY = currentCenterY + yOffsets[j] + Math.sin(angle) * radius * 0.5; // Add vertical swirl component
-                        const dotX = centerX + Math.cos(angle) * radius;
-                        ctx.beginPath();
-                        ctx.arc(dotX, dotY, dotSize, 0, Math.PI * 2);
-                        ctx.globalAlpha = blinkPhase; // Blink for consistency
-                        ctx.fillStyle = '#00295b'; // Blue
-                        ctx.fill();
-                        groupDots.push({x: dotX, y: dotY});
-                    }
-                    ctx.globalAlpha = 1;
-
-                    // Draw lines between the dots in the group
-                    ctx.strokeStyle = 'rgba(0,41,91,0.2)';
-                    ctx.lineWidth = 1;
-                    for (let i = 0; i < 3; i++) {
-                        for (let j = i + 1; j < 3; j++) {
-                            ctx.beginPath();
-                            ctx.moveTo(groupDots[i].x, groupDots[i].y);
-                            ctx.lineTo(groupDots[j].x, groupDots[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
 
             requestAnimationFrame(draw); // Continuous loop for blinking and updates
         }
@@ -293,7 +233,6 @@
             canvasHeight = canvas.height;
             canvasWidth = canvas.width;
             generateDots(); // Regenerate grid on resize
-            swarmGroups = []; // Reset swarm groups on resize
         }
 
         // Listen for scroll and resize
@@ -306,6 +245,29 @@
             lineWidth = Math.min(progress * canvasWidth, canvasWidth / 2); // Stop at halfway
             contentLine.style.width = `${lineWidth}px`;
             swarmActive = (progress > 0.5); // Start swarm animation after halfway progress
+            if (swarmActive && !redCenters.length) {
+                let potential = [];
+                dots.forEach(dot => {
+                    if (dot.baseX > canvasWidth / 2 && dot.baseY > canvasHeight / 2 && dot.baseY < canvasHeight * 1.5) { // Right-bottom area in base positions
+                        potential.push(dot);
+                    }
+                });
+                potential.sort(() => Math.random() - 0.5); // Shuffle
+                redCenters = potential.slice(0, 3); // 3 red centers
+                redCenters.forEach(center => {
+                    center.colorOverride = 'red';
+                    dots.forEach(d => {
+                        if (d !== center) {
+                            const dx = d.baseX - center.baseX;
+                            const dy = d.baseY - center.baseY;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            if (dist < 100) { // Decreased to 100px for fewer blue dots
+                                d.colorOverride = 'blue';
+                            }
+                        }
+                    });
+                });
+            }
             if (excerpt1) {
                 excerpt1.style.opacity = progress;
                 excerpt1.style.transform = `translateX(${(1 - progress) * -100}%)`;
