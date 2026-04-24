@@ -1,473 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neptune AUV</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Kanit:wght@700&display=swap" rel="stylesheet">
-    <style>
-        html {
-            direction: rtl;
-            scrollbar-width: thin; /* For Firefox */
-            scrollbar-color: #888 #f1f1f1; /* For Firefox */
-        }
-        body {
-            direction: ltr;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5; /* Neutral white-ish background */
-            overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
-        }
-        /* Mobile viewport fixes */
-        @media (max-width: 768px) {
-            html, body {
-                width: 100vw;
-                height: auto; /* Allow content to determine height */
-                overflow-y: auto; /* Allow vertical scrolling if needed */
-                overflow-x: hidden;
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neptune — Counter-UUV</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #00295B;
+      --ink: #1A1A1A;
+      --off: #FAFAF7;
+      --warm: #F0EEE6;
+      --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    }
 
-            .hero-section {
-                height: auto;
-                min-height: auto;
-                padding: 6rem 20px 1rem; /* Reasonable top padding */
-                display: block;
-            }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: var(--navy);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button, input, textarea { font-family: inherit; }
 
-            .hero-text {
-                position: static;
-                font-size: clamp(1.2rem, 6vw, 1.8rem); /* Slightly larger font for readability */
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-                line-height: 1.4;
-            }
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+    }
 
-            #excerpt-section {
-                min-height: auto;
-                height: auto;
-                margin-top: 1rem;
-                padding: 1rem 20px 2rem;
-                font-size: 1rem;
-            }
+    /* LEFT — navy pane */
+    .left {
+      background: var(--navy);
+      color: var(--off);
+      padding: 40px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 48px;
+      min-height: 100vh;
+    }
 
-            .excerpt-text {
-                font-size: clamp(1rem, 4.5vw, 1.2rem);
-                margin-bottom: 1rem;
-                line-height: 1.4;
-            }
+    .left-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .brand-name {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .brand-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(250, 250, 247, 0.3);
+      align-self: center;
+    }
+    .brand-tag,
+    .location {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+    .location { letter-spacing: 0.12em; opacity: 0.55; }
 
-            #bg-canvas {
-                width: 100vw;
-                height: 100vh;
-                position: fixed;
-            }
+    .statement {
+      max-width: 820px;
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      opacity: 0.6;
+      letter-spacing: 0.14em;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow-rule {
+      display: inline-block;
+      width: 14px;
+      height: 1px;
+      background: var(--off);
+      opacity: 0.7;
+    }
+    .statement h1 {
+      font-size: clamp(56px, 7.5vw, 112px);
+      line-height: 1.0;
+      font-weight: 500;
+      letter-spacing: -0.038em;
+      margin: 0;
+      text-wrap: balance;
+    }
+    .statement h1 em {
+      font-style: italic;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    .statement p {
+      font-size: clamp(17px, 1.5vw, 21px);
+      line-height: 1.55;
+      max-width: 520px;
+      margin: 34px 0 0;
+      opacity: 0.82;
+    }
+    .logo-mark {
+      display: block;
+      margin-top: 40px;
+      height: 64px;
+      width: auto;
+      opacity: 0.95;
+    }
 
-            main {
-                min-height: 100vh; /* Minimum viewport height */
-                padding-bottom: 2rem;
-            }
+    .copyright {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
 
-            /* Ensure logo is above content */
-            #logo {
-                z-index: 10;
-            }
-        }
+    /* RIGHT — off-white pane: top 2/3 = protect list, bottom 1/3 = contact */
+    .right {
+      background: var(--off);
+      padding: 40px 56px;
+      display: grid;
+      grid-template-rows: 2fr 1fr;
+      gap: 24px;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .protect-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
 
-        /* Desktop behavior */
-        @media (min-width: 769px) {
-            .hero-text {
-                position: relative; /* Normal document flow on desktop */
-                top: auto;
-                left: auto;
-                transform: none;
-                margin: 0 auto;
-                padding: 0;
-            }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--navy);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
 
-            .hero-section {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 2rem;
-            }
-        }
+    .protect-list {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .protect-row {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: baseline;
+      padding: clamp(18px, 2.2vw, 32px) 0;
+      gap: 20px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.094);
+    }
+    .protect-row:first-child {
+      border-top: 1px solid rgba(26, 26, 26, 0.094);
+    }
+    .protect-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(26, 26, 26, 0.33);
+      letter-spacing: 0.08em;
+    }
+    .protect-title {
+      font-size: clamp(32px, 4vw, 60px);
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .protect-desc {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(26, 26, 26, 0.44);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
 
-        /* Sleek scrollbar styling for WebKit browsers (Chrome, Safari) */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind content */
-            pointer-events: none; /* Doesn't interfere with clicks */
-        }
-        #logo {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 200px; /* Bigger logo */
-            height: auto;
-            z-index: 2; /* Above main */
-        }
-        #neptune-logo {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            width: 180px; /* Bigger size */
-            height: auto;
-            z-index: 2; /* Above main */
-        }
-        main {
-            position: relative;
-            z-index: 1;
-        }
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .hero-text {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 300; /* Lighter weight */
-            color: #1a1a1a;
-            text-align: center;
-            line-height: 1.4;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        #excerpt-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px;
-            margin-top: 2rem; /* Add space between hero and excerpt sections */
-        }
-        .upper-excerpt, .lower-excerpt {
-            flex: 1;
-            display: flex;
-            padding: 10px 0;
-        }
-        .upper-excerpt {
-            align-items: flex-end;
-        }
-        .lower-excerpt {
-            align-items: flex-start;
-        }
-        .excerpt-text {
-            font-size: clamp(1.2rem, 3vw, 2rem); /* Smaller font */
-            font-weight: 300; /* Same lighter weight */
-            color: #1a1a1a;
-            text-align: left;
-            line-height: 1.4;
-            max-width: 600px;
-            margin: 0;
-            padding-left: 20px;
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-        .dark-blue {
-            color: #00295b; /* RGB 0,41,91 */
-        }
-        #content-line {
-            height: 2px;
-            width: 0;
-            background: #00295b; /* RGB 0,41,91 */
-        }
-        .copyright {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.8rem;
-            color: #666;
-            font-family: 'Inter', sans-serif;
-            z-index: 3;
-            background-color: rgba(245, 245, 245, 0.9);
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-    </style>
+    .contact {
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .section-label-tight { margin-bottom: 14px; }
+    .contact-heading {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+      line-height: 1.15;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+    }
+    .field { display: flex; flex-direction: column; gap: 4px; min-height: 0; }
+    .field.full { grid-column: 1 / -1; }
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(26, 26, 26, 0.44);
+    }
+    .field.error .field-label { color: var(--navy); }
+    .field.error .field-label::after {
+      content: ' · required';
+    }
+    .field input,
+    .field textarea {
+      background: var(--warm);
+      border: 1px solid transparent;
+      padding: 10px 12px;
+      font-size: 13.5px;
+      color: var(--ink);
+      outline: none;
+      resize: none;
+      border-radius: 0;
+    }
+    .field textarea {
+      min-height: 60px;
+      flex: 1;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field.error input,
+    .field.error textarea {
+      border-color: var(--navy);
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .form-error {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+    }
+    .submit {
+      background: var(--navy);
+      color: var(--off);
+      border: none;
+      padding: 13px 22px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0;
+      letter-spacing: 0.01em;
+      transition: opacity 0.15s ease;
+      margin-left: auto;
+    }
+    .submit:hover { opacity: 0.88; }
+    .submit:disabled { cursor: default; opacity: 0.55; }
+
+    .sent {
+      background: var(--warm);
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+    .sent-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--navy);
+      letter-spacing: 0.12em;
+    }
+    .sent-text {
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .hidden { display: none !important; }
+
+    /* Intro animations + idle breathing + hover-grow on protect rows */
+    @keyframes np-slide-left {
+      0%   { opacity: 0; transform: translateX(-96px); }
+      60%  { opacity: 1; }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes np-fade-in {
+      from { opacity: 0; }
+      to   { opacity: var(--op, 1); }
+    }
+    @keyframes np-rule-grow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes np-breathe {
+      0%, 100% { transform: translateY(0); opacity: var(--op, 1); }
+      50%      { transform: translateY(-8px); opacity: calc(var(--op, 1) * 0.82); }
+    }
+    @keyframes np-breathe-img {
+      0%, 100% { transform: scale(1); opacity: var(--op, 0.95); }
+      50%      { transform: scale(1.04); opacity: calc(var(--op, 0.95) * 0.82); }
+    }
+
+    .np-in-left,
+    .np-in-fade,
+    .np-in-rule,
+    .np-breathe,
+    .np-breathe-img {
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    /* Hold elements invisible until fonts have loaded, then play intros.
+       Prevents font swap from reflowing text mid-animation. */
+    .np-in-left, .np-in-fade, .np-in-rule, .np-breathe, .np-breathe-img { opacity: 0; }
+
+    html.fonts-ready .np-in-left { animation: np-slide-left 1100ms cubic-bezier(0.22, 0.8, 0.28, 1) var(--d, 0ms) both; }
+    html.fonts-ready .np-in-fade { animation: np-fade-in 900ms ease-out var(--d, 0ms) both; }
+    html.fonts-ready .np-in-rule { transform-origin: left center; transform: scaleX(0); animation: np-rule-grow 800ms cubic-bezier(0.22, 0.8, 0.28, 1) var(--d, 0ms) both; }
+
+    /* After intro settles, chain into the breathing loop. */
+    html.fonts-ready .np-breathe     { animation: np-slide-left 1100ms cubic-bezier(0.22, 0.8, 0.28, 1) var(--d, 0ms) both, np-breathe 4.2s ease-in-out calc(var(--d, 0ms) + 1300ms) infinite; }
+    html.fonts-ready .np-breathe-img { animation: np-slide-left 1100ms cubic-bezier(0.22, 0.8, 0.28, 1) var(--d, 0ms) both, np-breathe-img 4.8s ease-in-out calc(var(--d, 0ms) + 1400ms) infinite; }
+
+    .protect-row {
+      transition: transform 320ms cubic-bezier(0.22, 0.8, 0.28, 1),
+                  background-color 320ms ease,
+                  border-color 220ms ease;
+      transform-origin: left center;
+      cursor: default;
+    }
+    @media (hover: hover) {
+      .protect-row:hover {
+        transform: scale(1.06);
+        background: rgba(0, 41, 91, 0.07);
+        border-color: transparent;
+      }
+      /* Hide the dividing line ABOVE the hovered row so it doesn't appear
+         inside the tinted hover area when the row scales up. */
+      .protect-row:has(+ .protect-row:hover) {
+        border-bottom-color: transparent;
+      }
+      .protect-row:hover .protect-title { letter-spacing: 0; }
+      .protect-row:hover .protect-desc { transform: translateX(-8px); }
+    }
+    .protect-row:active {
+      transform: scale(1.06);
+      border-color: transparent;
+    }
+    .protect-desc { transition: transform 320ms cubic-bezier(0.22, 0.8, 0.28, 1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .np-in-left, .np-in-fade, .np-in-rule,
+      .np-breathe, .np-breathe-img {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .protect-row { transition: none; }
+      .protect-row:hover { transform: none; }
+    }
+
+    /* Mobile — stacked single navy pane */
+    @media (max-width: 900px) {
+      body { background: var(--navy); }
+      .page {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+      }
+      .left {
+        padding: 28px 22px;
+        gap: 24px;
+        min-height: 0;
+      }
+      .brand-name { font-size: 17px; }
+      .brand-divider { display: none; }
+      .brand-tag { font-size: 9px; }
+      .location { font-size: 9px; }
+
+      .eyebrow { font-size: 9.5px; margin-bottom: 12px; gap: 8px; }
+      .eyebrow-rule { width: 10px; }
+      .statement h1 { font-size: 32px; letter-spacing: -0.03em; }
+      .statement p { font-size: 13.5px; margin-top: 14px; }
+      .logo-mark { margin-top: 14px; height: 36px; }
+
+      /* Right pane re-skinned for dark mobile */
+      .right {
+        display: block;
+        background: transparent;
+        padding: 0 22px 28px;
+        min-height: 0;
+        color: var(--off);
+        gap: 0;
+      }
+      .protect-list {
+        flex: initial;
+        justify-content: flex-start;
+      }
+      .section-label { color: var(--off); opacity: 0.7; font-size: 9.5px; letter-spacing: 0.14em; margin-bottom: 10px; }
+      .section-label-tight { margin-bottom: 8px; }
+
+      .protect-row {
+        grid-template-columns: 1fr auto;
+        padding: 9px 0;
+        border-bottom-color: rgba(250, 250, 247, 0.18);
+      }
+      .protect-row:first-child { border-top-color: rgba(250, 250, 247, 0.18); }
+      .protect-num { order: 2; color: rgba(250, 250, 247, 0.5); font-size: 9.5px; }
+      .protect-title { color: var(--off); font-size: 13px; font-weight: 500; letter-spacing: -0.005em; line-height: 1.3; }
+      .protect-desc { display: none; }
+
+      .contact { margin-top: 20px; }
+      .contact-heading { display: none; }
+
+      .form { grid-template-columns: 1fr; gap: 8px; }
+      .field.full, .field { grid-column: auto; }
+      .field-label { display: none; }
+      .field input, .field textarea {
+        background: rgba(250, 250, 247, 0.08);
+        color: var(--off);
+        border: 1px solid rgba(250, 250, 247, 0.15);
+        padding: 9px 11px;
+        font-size: 12.5px;
+      }
+      .field input::placeholder, .field textarea::placeholder {
+        color: rgba(250, 250, 247, 0.5);
+      }
+      .field.error input, .field.error textarea,
+      .field input:focus, .field textarea:focus {
+        border-color: var(--off);
+      }
+      .form-actions { margin-top: 0; flex-direction: column; align-items: stretch; gap: 8px; }
+      .form-error { color: var(--off); opacity: 0.85; font-size: 10.5px; }
+      .submit {
+        width: 100%;
+        background: var(--off);
+        color: var(--navy);
+        padding: 11px;
+        font-size: 12.5px;
+        margin-left: 0;
+      }
+      .sent {
+        background: rgba(250, 250, 247, 0.08);
+        padding: 16px;
+      }
+      .sent-label { color: var(--off); opacity: 0.8; font-size: 10px; letter-spacing: 0.1em; }
+      .sent-text { color: var(--off); font-size: 13px; }
+
+      .copyright {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(250, 250, 247, 0.18);
+        opacity: 0.5;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-    <img id="logo" src="Logos and Names/logob.png" alt="AUV Company Logo">
-    <img id="neptune-logo" src="Logos and Names/neptuneb.png" alt="Neptune Logo">
-    <main>
-        <section class="hero-section">
-            <div class="hero-text">
-                We are building scalable autonomous underwater vehicle swarms to combat <span class="dark-blue">emerging unmanned threats</span>.
-            </div>
-        </section>
-        <section id="excerpt-section">
-            <div class="upper-excerpt">
-                <div id="excerpt1" class="excerpt-text">
-                    We are looking for hardcore mechanical, software, and gnc engineers who have a passion for building. Experience on boats is a plus.
-                </div>
-            </div>
-            <div id="content-line"></div>
-            <div class="lower-excerpt">
-                <div id="excerpt2" class="excerpt-text">
-                    If this sounds like you - send your resume with a picture of something you built to john@neptuneauv.com
-                    <br><br><br>
-                    HQ in West LA
-                </div>
-            </div>
-        </section>
-    </main>
+  <div class="page">
+    <!-- LEFT pane (navy) -->
+    <section class="left">
+      <header class="left-header np-in-fade" style="--d: 80ms;">
+        <div class="brand">
+          <span class="brand-name">Neptune</span>
+          <span class="brand-divider"></span>
+          <span class="brand-tag">Maritime Autonomy</span>
+        </div>
+        <span class="location">El Segundo, CA</span>
+      </header>
 
-    <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        const contentLine = document.getElementById('content-line');
-        const excerpt1 = document.getElementById('excerpt1');
-        const excerpt2 = document.getElementById('excerpt2');
-        let dots = [];
-        const gridSpacing = 50; // Distance between dots in grid (adjust for density)
-        const dotSize = 2; // Fixed size for all dots
-        const waveAmplitude = 10; // Max horizontal wave offset (pixels)
-        const waveFrequency = 0.02; // How "wavy" it is (higher = more waves)
-        const parallaxSpeed = 0.3; // Vertical parallax factor
-        const blinkDuration = 500; // Blink speed in ms (for red dots)
-        let scrollY = 0;
-        let lineWidth = 0;
-        let swarmActive = false;
-        let redCenters = [];
-        let maxScroll = 0;
-        let canvasHeight = 0;
-        let canvasWidth = 0;
+      <div class="statement">
+        <div class="eyebrow">
+          <span class="eyebrow-rule np-in-rule" style="--d: 220ms;"></span>
+          <span class="np-in-left" style="--d: 300ms;">Counter-UUV</span>
+        </div>
+        <h1 class="np-breathe" style="--d: 420ms;">Protecting the undersea <em>perimeter.</em></h1>
+        <p class="np-in-left" style="--d: 620ms;">Affordable. Scalable. Ready.</p>
+        <img src="assets/logow.png" alt="Neso" class="logo-mark np-breathe-img" style="--d: 780ms; --op: 0.95;">
+      </div>
 
-        // Generate dots in a uniform grid
-        function generateDots() {
-            dots = [];
+      <div class="copyright np-in-fade" style="--d: 1000ms; --op: 0.5;">© 2026 Neptune Technologies Corp. All Rights Reserved</div>
+    </section>
 
-            // Performance optimization: reduce dots on mobile devices
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                            window.innerWidth < 768;
-            const performanceGridSpacing = isMobile ? gridSpacing * 1.5 : gridSpacing; // Larger spacing on mobile
-            const performanceBlueChance = isMobile ? 0.03 : 0.05; // Fewer blinking dots on mobile
-            const performanceDotSize = isMobile ? dotSize * 0.6 : dotSize; // Much smaller dots on mobile for better performance
+    <!-- RIGHT pane (off-white) -->
+    <section class="right">
+      <div class="protect-wrapper">
+        <div class="section-label">What we protect</div>
+        <div class="protect-list">
+          <div class="protect-row">
+            <span class="protect-num">01</span>
+            <span class="protect-title">Naval ports</span>
+            <span class="protect-desc">Fleet concentration</span>
+          </div>
+          <div class="protect-row">
+            <span class="protect-num">02</span>
+            <span class="protect-title">Commercial harbors</span>
+            <span class="protect-desc">Trade &amp; energy</span>
+          </div>
+          <div class="protect-row">
+            <span class="protect-num">03</span>
+            <span class="protect-title">Maritime chokepoints</span>
+            <span class="protect-desc">Straits &amp; approaches</span>
+          </div>
+        </div>
+      </div>
 
-            const cols = Math.ceil(canvas.width / performanceGridSpacing) + 2; // Extra for waving and clearing
-            const rows = Math.ceil((canvasHeight * 2) / performanceGridSpacing); // Extra height for scrolling
+      <div class="contact">
+        <div class="section-label section-label-tight">Contact</div>
+        <h2 class="contact-heading">Request a demo.</h2>
 
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    // Increase red dot chance and ensure blue dots surround them
-                    let colorOverride = null;
-                    const rand = Math.random();
+        <form class="form" id="contact-form" novalidate>
+          <label class="field" data-field="name">
+            <span class="field-label">Name</span>
+            <input type="text" name="name" placeholder="Name" autocomplete="name">
+          </label>
+          <label class="field" data-field="org">
+            <span class="field-label">Organization</span>
+            <input type="text" name="org" placeholder="Organization" autocomplete="organization">
+          </label>
+          <label class="field full" data-field="email">
+            <span class="field-label">Email</span>
+            <input type="email" name="email" placeholder="Email" autocomplete="email">
+          </label>
+          <label class="field full message" data-field="message">
+            <span class="field-label">Message</span>
+            <textarea name="message" rows="3" placeholder="Message"></textarea>
+          </label>
+          <!-- Honeypot: bots fill visible-ish fields; humans won't see this. -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          <div class="form-actions">
+            <span class="form-error" id="form-error" hidden>Couldn't send — please try again or email john@neptuneauv.com.</span>
+            <button type="submit" class="submit" id="submit-btn">Send →</button>
+          </div>
+        </form>
 
-                    if (rand < 0.015) { // 2% chance for red dots
-                        colorOverride = 'red';
-                        // Mark surrounding positions for blue dots (if they exist and aren't already assigned)
-                        const positions = [
-                            [row-1, col-1], [row-1, col], [row-1, col+1],
-                            [row, col-1],                 [row, col+1],
-                            [row+1, col-1], [row+1, col], [row+1, col+1]
-                        ];
-                        positions.forEach(([r, c]) => {
-                            if (r >= 0 && r < rows && c >= 0 && c < cols) {
-                                // We'll handle this in a second pass to avoid conflicts
-                            }
-                        });
-                    } else if (rand < 0.02 + performanceBlueChance) { // Additional chance for blue dots
-                        colorOverride = 'blue';
-                    }
+        <div class="sent hidden" id="sent">
+          <div class="sent-label">✓ MESSAGE RECEIVED</div>
+          <div class="sent-text">Thanks — we'll be in touch within two business days.</div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-                    dots.push({
-                        baseX: col * performanceGridSpacing,
-                        baseY: row * performanceGridSpacing,
-                        size: performanceDotSize,
-                        colorOverride: colorOverride
-                    });
-                }
-            }
+  <noscript>
+    <style>
+      .np-in-left, .np-in-fade, .np-in-rule, .np-breathe, .np-breathe-img {
+        opacity: 1 !important; transform: none !important;
+      }
+    </style>
+  </noscript>
 
-            // Second pass: ensure blue dots surround red dots
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const dotIndex = row * cols + col;
-                    if (dots[dotIndex].colorOverride === 'red') {
-                        // Make surrounding dots blue
-                        const positions = [
-                            [row-1, col-1], [row-1, col], [row-1, col+1],
-                            [row, col-1],                 [row, col+1],
-                            [row+1, col-1], [row+1, col], [row+1, col+1]
-                        ];
-                        positions.forEach(([r, c]) => {
-                            if (r >= 0 && r < rows && c >= 0 && c < cols) {
-                                const neighborIndex = r * cols + c;
-                                if (dots[neighborIndex].colorOverride === null) {
-                                    dots[neighborIndex].colorOverride = 'blue';
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        }
+  <script>
+    // Gate intro animations on font load so text doesn't reflow mid-slide.
+    // Safety timeout ensures content appears even if fonts stall.
+    (function () {
+      const markReady = () => document.documentElement.classList.add('fonts-ready');
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(markReady);
+      } else {
+        markReady();
+      }
+      setTimeout(markReady, 2000);
+    })();
 
-        // Draw function with wave, constant blink, and full-height clearing from left to right
-        function draw() {
-            // Performance optimization: throttle animation on mobile
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                            window.innerWidth < 768;
+    (function () {
+      const form = document.getElementById('contact-form');
+      const sent = document.getElementById('sent');
+      const errEl = document.getElementById('form-error');
+      const btn = document.getElementById('submit-btn');
+      const emailRe = /^\S+@\S+\.\S+$/;
+      const ENDPOINT = 'https://formsubmit.co/ajax/john@neptuneauv.com';
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const now = Date.now();
-            const blinkPhase = (Math.sin(now / blinkDuration) + 1) / 2; // 0-1 opacity for constant blink
-            const blueBlinkPhase = (Math.sin(now / blinkDuration + Math.PI) + 1) / 2; // Offset for blue
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const data = new FormData(form);
+        const fields = {
+          name: (data.get('name') || '').trim(),
+          org: (data.get('org') || '').trim(),
+          email: (data.get('email') || '').trim(),
+          message: (data.get('message') || '').trim(),
+          honey: data.get('_honey') || '',
+        };
+        const errors = {
+          name: !fields.name,
+          org: !fields.org,
+          email: !emailRe.test(fields.email),
+          message: !fields.message,
+        };
 
-            dots.forEach(dot => {
-                // Parallax vertical adjustment
-                let adjustedY = (dot.baseY - scrollY * parallaxSpeed) % (canvasHeight * 2);
-                if (adjustedY < 0) adjustedY += canvasHeight * 2;
-
-                // Wave horizontal offset based on Y and scrollY
-                const waveOffset = Math.sin(adjustedY * waveFrequency + scrollY * 0.001) * waveAmplitude;
-                let adjustedX = dot.baseX + waveOffset;
-
-                // Skip drawing if to the left of the line's end (full-height clear from left)
-                if (adjustedX < lineWidth) {
-                    return; // Don't draw this dot, creating full-height white space
-                }
-
-                // Draw dot with override if any
-                ctx.beginPath();
-                ctx.arc(adjustedX, adjustedY, dot.size, 0, Math.PI * 2);
-                let alpha = 1;
-                let fillStyle = '#d3d3d3'; // Default grey
-                if (dot.colorOverride === 'red') {
-                    fillStyle = '#ff0000';
-                    alpha = 1; // Solid red
-                } else if (dot.colorOverride === 'blue') {
-                    fillStyle = '#00295b'; // Blue color
-                    alpha = 0.2 + (blueBlinkPhase * 0.6); // Fade between 0.4 and 1.0 opacity
-                }
-                ctx.globalAlpha = alpha;
-                ctx.fillStyle = fillStyle;
-                ctx.fill();
-            });
-            ctx.globalAlpha = 1; // Reset alpha
-
-            // Performance optimization: throttle frame rate on mobile
-            if (isMobile) {
-                setTimeout(() => requestAnimationFrame(draw), 32); // ~30fps on mobile
-            } else {
-                requestAnimationFrame(draw); // 60fps on desktop
-            }
-        }
-
-        // Handle resize
-        function resizeCanvas() {
-            const devicePixelRatio = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-
-            // Set actual canvas size in memory (scaled for retina)
-            canvas.width = rect.width * devicePixelRatio;
-            canvas.height = rect.height * devicePixelRatio;
-
-            // Scale the drawing context so everything draws at the correct size
-            ctx.scale(devicePixelRatio, devicePixelRatio);
-
-            // Set display size (CSS size)
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
-
-            canvasHeight = rect.height;
-            canvasWidth = rect.width;
-            generateDots(); // Regenerate grid on resize
-
-            // Handle mobile layout immediately on resize
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                            window.innerWidth < 768;
-            if (isMobile) {
-                // Show excerpts immediately on mobile
-                if (excerpt1) {
-                    excerpt1.style.opacity = '1';
-                    excerpt1.style.transform = 'translateX(0)';
-                }
-                if (excerpt2) {
-                    excerpt2.style.opacity = '1';
-                    excerpt2.style.transform = 'translateX(0)';
-                }
-            }
-        }
-
-        // Listen for scroll and resize
-        window.addEventListener('scroll', () => {
-            scrollY = window.scrollY;
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                            window.innerWidth < 768;
-
-            if (!isMobile) {
-                // Desktop scroll behavior
-                const initialViewport = canvasHeight;
-                const effectiveScroll = Math.max(0, scrollY - initialViewport);
-                const remainingScroll = maxScroll - initialViewport;
-                const progress = remainingScroll > 0 ? effectiveScroll / remainingScroll : 0;
-                lineWidth = Math.min(progress * canvasWidth, canvasWidth / 2); // Stop at halfway
-                contentLine.style.width = `${lineWidth}px`;
-                swarmActive = (progress > 0.5); // Start swarm animation after halfway progress
-
-                // Always show excerpts on desktop
-                if (excerpt1) {
-                    excerpt1.style.opacity = '1';
-                    excerpt1.style.transform = 'translateX(0)';
-                }
-                if (excerpt2) {
-                    excerpt2.style.opacity = '1';
-                    excerpt2.style.transform = 'translateX(0)';
-                }
-            } else {
-                // Mobile: static layout, no scroll animations
-                swarmActive = false;
-                lineWidth = 0;
-                contentLine.style.width = '0px';
-                // Show excerpts immediately on mobile
-                if (excerpt1) {
-                    excerpt1.style.opacity = '1';
-                    excerpt1.style.transform = 'translateX(0)';
-                }
-                if (excerpt2) {
-                    excerpt2.style.opacity = '1';
-                    excerpt2.style.transform = 'translateX(0)';
-                }
-            }
+        let hasError = false;
+        form.querySelectorAll('.field').forEach(function (el) {
+          const key = el.dataset.field;
+          const bad = errors[key];
+          el.classList.toggle('error', !!bad);
+          if (bad) hasError = true;
         });
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        });
+        if (hasError) return;
 
-        // Initial setup
-        resizeCanvas();
-        maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        draw(); // Start the animation loop
-    </script>
-    <div class="copyright">© 2025 Neptune Technologies Corp. All Rights Reserved.</div>
+        // Silently drop bot submissions.
+        if (fields.honey) {
+          form.classList.add('hidden');
+          sent.classList.remove('hidden');
+          return;
+        }
+
+        errEl.hidden = true;
+        btn.disabled = true;
+        const originalLabel = btn.textContent;
+        btn.textContent = 'Sending…';
+
+        try {
+          const res = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              Name: fields.name,
+              Organization: fields.org,
+              Email: fields.email,
+              Message: fields.message,
+              _subject: 'Demo request — ' + fields.name + ' (' + fields.org + ')',
+              _template: 'table',
+              _captcha: 'false',
+            }),
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          form.classList.add('hidden');
+          sent.classList.remove('hidden');
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+          errEl.hidden = false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
