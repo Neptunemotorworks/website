@@ -560,7 +560,7 @@
           <!-- Honeypot: bots fill visible-ish fields; humans won't see this. -->
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <div class="form-actions">
-            <span class="form-error" id="form-error" hidden>Couldn't send — please try again or email john@neptuneauv.com.</span>
+            <span class="form-error" id="form-error" hidden>Couldn't send — please try again in a moment.</span>
             <button type="submit" class="submit" id="submit-btn">Send →</button>
           </div>
         </form>
@@ -600,7 +600,7 @@
       const errEl = document.getElementById('form-error');
       const btn = document.getElementById('submit-btn');
       const emailRe = /^\S+@\S+\.\S+$/;
-      const ENDPOINT = 'https://formsubmit.co/ajax/john@neptuneauv.com';
+      const ENDPOINT = 'https://formsubmit.co/ajax/e2311b24358e1892da3c68cff666f66d';
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
